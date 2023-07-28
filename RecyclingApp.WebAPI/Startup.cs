@@ -6,56 +6,55 @@ using Microsoft.Extensions.Hosting;
 using RecyclingApp.Application;
 using RecyclingApp.Infrastructure;
 
-namespace RecyclingApp.WebAPI
+namespace RecyclingApp.WebAPI;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddApplication();
+        services.AddInfrastructure(Configuration);
+        services.AddControllers();
+        services.AddTransient<ExceptionMiddleware>();
+        services.AddSwaggerGen();
+
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            Configuration = configuration;
+            app.UseDeveloperExceptionPage();
         }
 
-        public IConfiguration Configuration { get; }
+        app.UseMiddleware<ExceptionMiddleware>();
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        app.UseHttpsRedirection();
+
+        app.UseRouting();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
         {
-            services.AddApplication();
-            services.AddInfrastructure(Configuration);
-            services.AddControllers();
-            services.AddTransient<ExceptionMiddleware>();
-            services.AddSwaggerGen();
+            endpoints.MapControllers();
+        });
 
-        }
+        app.UseSwagger();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        app.UseSwaggerUI(c =>
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RecyclingApp");
-                c.RoutePrefix = string.Empty;
-            });
-        }
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "RecyclingApp");
+            c.RoutePrefix = string.Empty;
+        });
     }
 }
