@@ -3,6 +3,7 @@ using RecyclingApp.Application.Filters;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Queries;
 using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 
 namespace RecyclingApp.Application.Mapper
 {

@@ -3,7 +3,7 @@ using MediatR;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 using System.Threading;
 using System.Threading.Tasks;
 

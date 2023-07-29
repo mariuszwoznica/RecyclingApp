@@ -1,5 +1,6 @@
-﻿using System;
-using static RecyclingApp.Domain.Model.Order;
+﻿using RecyclingApp.Domain.Model.Orders;
+using System;
+using static RecyclingApp.Domain.Model.Orders.Order;
 
 namespace RecyclingApp.Application.Filters
 {

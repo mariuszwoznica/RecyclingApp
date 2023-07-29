@@ -2,6 +2,7 @@
 using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Domain.Common;
 using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 using System;
 using System.Linq;
 using System.Threading;

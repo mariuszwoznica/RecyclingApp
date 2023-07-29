@@ -7,6 +7,7 @@ using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

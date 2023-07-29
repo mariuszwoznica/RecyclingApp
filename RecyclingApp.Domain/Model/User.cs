@@ -1,28 +1,24 @@
 ﻿using RecyclingApp.Domain.Common;
+using RecyclingApp.Domain.Model.Orders;
 using System.Collections.Generic;
 
-namespace RecyclingApp.Domain.Model
+namespace RecyclingApp.Domain.Model;
+
+public class User : BaseEntity, IAuditable
 {
-    public class User : BaseEntity, IAuditable
+    public string FirstName { get; private set; }
+    public string LastName { get; private set; }
+    public ICollection<Order> Orders { get; private set; }
+
+    private User() { }
+
+    public User(string firstName, string lastName)
     {
-        private User() { }
-
-        public User(string firstName, string lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-        }
-
-        private readonly List<Order> _orders = new List<Order>();
-
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public IEnumerable<Order> Orders => _orders.AsReadOnly();
-
-        public static User Create(string firstName, string lastName)
-        {
-            return new User(firstName, lastName);
-        }
-
+        FirstName = firstName;
+        LastName = lastName;
     }
+
+    public static User Create(string firstName, string lastName)
+        => new User(firstName, lastName);
+
 }

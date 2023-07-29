@@ -3,7 +3,7 @@ using Moq;
 using RecyclingApp.Application.Commands;
 using RecyclingApp.Application.Mapper;
 using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

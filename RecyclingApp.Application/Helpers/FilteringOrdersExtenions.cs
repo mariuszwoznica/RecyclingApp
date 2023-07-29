@@ -1,5 +1,5 @@
 ﻿using RecyclingApp.Application.Filters;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 using System.Linq;
 
 namespace RecyclingApp.Application.Helpers

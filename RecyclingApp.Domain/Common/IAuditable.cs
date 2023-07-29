@@ -1,6 +1,3 @@
-﻿namespace RecyclingApp.Domain.Common
-{
-    public interface IAuditable
-    {
-    }
-}
+﻿namespace RecyclingApp.Domain.Common;
+
+public interface IAuditable { }
