@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RecyclingApp.Application.Filters;
 using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Orders.Queries;
 using RecyclingApp.Application.Queries;
 using RecyclingApp.Domain.Model;
 using RecyclingApp.Domain.Model.Orders;

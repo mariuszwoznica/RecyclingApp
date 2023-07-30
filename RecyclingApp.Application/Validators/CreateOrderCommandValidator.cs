@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using RecyclingApp.Application.Commands;
+using RecyclingApp.Application.Orders.Commands;
 
 namespace RecyclingApp.Application.Validators
 {

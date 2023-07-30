@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Moq;
-using RecyclingApp.Application.Commands;
 using RecyclingApp.Application.Mapper;
+using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Domain.Interfaces;
 using RecyclingApp.Domain.Model.Orders;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using static RecyclingApp.Application.Commands.CreateOrderCommand;
+using static RecyclingApp.Application.Orders.Commands.CreateOrderCommand;
 
 namespace RecyclingApp.Tests
 {
