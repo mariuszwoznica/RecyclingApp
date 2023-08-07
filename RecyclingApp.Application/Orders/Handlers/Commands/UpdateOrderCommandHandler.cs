@@ -1,43 +1,56 @@
 ﻿using AutoMapper;
 using MediatR;
+using RecyclingApp.Application.Exceptions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Commands;
+using RecyclingApp.Application.Orders.Exceptions;
+using RecyclingApp.Application.Orders.Searchers;
 using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model;
-using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Orders.Handlers.Commands;
 
-public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, Response<OrderDto>>
+internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder, Response<OrderDto>>
 {
     private readonly IOrderRepository _orderRepository;
-    private readonly IRepository<Product> _productRepository;
+    private readonly IOrderSearcher _searcher;
     private readonly IMapper _mapper;
 
-    public UpdateOrderCommandHandler(IOrderRepository orderRepository, IRepository<Product> productRepository, IMapper mapper)
+    public UpdateOrderCommandHandler(
+        IOrderRepository orderRepository,
+        IOrderSearcher searcher,
+        IMapper mapper)
     {
         _orderRepository = orderRepository;
-        _productRepository = productRepository;
+        _searcher = searcher;
         _mapper = mapper;
     }
 
-    public async Task<Response<OrderDto>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Response<OrderDto>> Handle(UpdateOrder request, CancellationToken cancellationToken)
     {
-        var product = await _productRepository.GetByIdAsync(request.ProductId);
-        var order = await _orderRepository.GetWithItemsAsync(request.Id);
+        var order = await _orderRepository.GetWithItemsAsync(id: request.OrderId);
+        if (order is null)
+            throw new OrderDoesNotExistsException(request.OrderId);
 
-        if (product != null && order != null)
-        {
-            order.AddItem(request.Id, request.ProductId, request.Quantity);
-            _orderRepository.Update(order);
-            await _orderRepository.SaveChangesAsync();
+        var products = await _searcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
+        if (products.Count != request.ProductIds.Count)
+            throw new ProductDoesNotExistsException();
 
-            return new Response<OrderDto>(_mapper.Map<OrderDto>(order));
-        }
-        else
-            throw new ArgumentException();
+        foreach (var item in order.OrderItems)
+            order.RemoveItem(item);
+
+        for (int i = 0; i < request.ProductIds.Count; i++)
+            order.AddItem(
+                orderId: request.OrderId, 
+                productId: request.ProductIds.ElementAt(i), 
+                quantity: request.Quantity.ElementAt(i));
+
+        _orderRepository.Update(entity: order);
+        await _orderRepository.SaveChangesAsync();
+
+        return new Response<OrderDto>(_mapper.Map<OrderDto>(order));
     }
 }

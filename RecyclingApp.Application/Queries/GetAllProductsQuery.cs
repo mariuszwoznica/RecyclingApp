@@ -56,10 +56,10 @@ namespace RecyclingApp.Application.Queries
                     .SearchProducts(productParamiters)
                     .FilterProducts(productParamiters)
                     .ApplaySorting(productParamiters.OrderBy)
-                    .ApplayPaging(paramiters.Page, paramiters.Limit)
+                    .ApplyPaging(paramiters.Page, paramiters.Limit)
                     .ToListAsync(cancellationToken: cancellationToken);
 
-                return new PagedResponse<IEnumerable<ProductDto>>(_mapper.Map<IEnumerable<ProductDto>>(products), products.Count);
+                return new PageResponse<IEnumerable<ProductDto>>(_mapper.Map<IEnumerable<ProductDto>>(products), products.Count);
 
             }
         }

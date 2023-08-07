@@ -30,16 +30,7 @@ namespace RecyclingApp.Infrastructure.Data
                 modelBuilder.Entity(entityType.ClrType)
                     .Property<DateTime>("CreatedAt");
             }
-
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes()
-                .Where(entity => entity.ClrType.IsAssignableFrom(typeof(BaseEntity))))
-            {
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property<Guid>("Id").HasDefaultValueSql("uuid_generate_v4()");
-            }
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.HasPostgresExtension("uuid-ossp");
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

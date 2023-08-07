@@ -50,10 +50,10 @@ namespace RecyclingApp.Application.Queries
                 var users = await query
                     .SearchUsers(userParamiters)
                     .ApplaySorting(userParamiters.OrderBy)
-                    .ApplayPaging(parameters.Page, parameters.Limit)
+                    .ApplyPaging(parameters.Page, parameters.Limit)
                     .ToListAsync(cancellationToken: cancellationToken);
 
-                return new PagedResponse<IEnumerable<UserDto>>(_mapper.Map<IEnumerable<UserDto>>(users), users.Count);
+                return new PageResponse<IEnumerable<UserDto>>(_mapper.Map<IEnumerable<UserDto>>(users), users.Count);
             }
         }
 

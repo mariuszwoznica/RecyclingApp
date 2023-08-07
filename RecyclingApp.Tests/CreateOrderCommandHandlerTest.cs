@@ -2,13 +2,15 @@
 using Moq;
 using RecyclingApp.Application.Mapper;
 using RecyclingApp.Application.Orders.Commands;
+using RecyclingApp.Application.Orders.Handlers.Commands;
 using RecyclingApp.Domain.Interfaces;
 using RecyclingApp.Domain.Model.Orders;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using static RecyclingApp.Application.Orders.Commands.CreateOrderCommand;
+using static RecyclingApp.Application.Orders.Commands.CreateOrder;
 
 namespace RecyclingApp.Tests
 {
@@ -32,7 +34,7 @@ namespace RecyclingApp.Tests
         [Fact]
         public async Task CreateOrderTest()
         {
-            var result = await _commandHandler.Handle(new CreateOrderCommand("orderName"), CancellationToken.None);
+            var result = await _commandHandler.Handle(new CreateOrder(Guid.NewGuid(), 5), CancellationToken.None);
 
             result.Data.Status.Any();
             result.Data.Status.Equals("open");
