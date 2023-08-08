@@ -1,24 +1,23 @@
 ﻿using RecyclingApp.Application.Exceptions;
 using RecyclingApp.Application.Helpers;
 using RecyclingApp.Application.Utilities;
-using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Model.Products;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace RecyclingApp.Application.Orders.Utilities;
+namespace RecyclingApp.Application.Products.Utilities;
 
-internal static class OrdersExtensions
+internal static class ProductsExtensions
 {
-    internal static IQueryable<Order> ApplyCreatedAtFilter(this IQueryable<Order> query, DateTime? minCreatedAt, DateTime? maxCreatedAt)
-    {
-        if (minCreatedAt.HasValue && maxCreatedAt.HasValue)
-            query = query.Where(o => o.CreatedAt >= minCreatedAt && o.CreatedAt <= maxCreatedAt);
+    internal static IQueryable<Product> ApplyPriceFilter(this IQueryable<Product> query, decimal? minPrice, decimal? maxPrice)
+        => query = minPrice.HasValue && maxPrice.HasValue
+            ? query.Where(p => p.Price >= minPrice && p.Price <= maxPrice) 
+            : minPrice.HasValue ? query.Where(p => p.Price >= minPrice) 
+            : maxPrice.HasValue ? query.Where(p => p.Price <= maxPrice)
+            : query;
 
-        return query;
-    }
-
-    internal static IOrderedQueryable<Order> ApplySorting(this IQueryable<Order> query, string[]? sortingParams)
+    internal static IOrderedQueryable<Product> ApplySorting(this IQueryable<Product> query, string[]? sortingParams)
     {
         if (!sortingParams.IsNullOrEmpty())
         {
@@ -31,7 +30,7 @@ internal static class OrdersExtensions
                         ? query.OrderByDescending(GetSortProperty(propertyName))
                         : query.ThenByDescending(GetSortProperty(propertyName));
                 else
-                    query = orderingCount == 0 
+                    query = orderingCount == 0
                         ? query.OrderBy(GetSortProperty(propertyName))
                         : query.ThenBy(GetSortProperty(propertyName));
                 orderingCount++;
@@ -42,11 +41,12 @@ internal static class OrdersExtensions
             return query.OrderBy(o => o.Id);
     }
 
-    private static Expression<Func<Order, object>> GetSortProperty(string property)
+    private static Expression<Func<Product, object>> GetSortProperty(string property)
         => property switch
         {
-            "status" => Order => Order.Status,
-            "createdat" => Order => Order.CreatedAt,
+            "name" => Product => Product.Name,
+            "price" => Product => Product.Price,
+            "type" => Product => Product.Type,
             var unknownProperty => throw new SortingPropertyDoesNotExistException(unknownProperty)
         };
 }

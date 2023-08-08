@@ -5,6 +5,7 @@ using RecyclingApp.Application.Orders.Queries;
 using RecyclingApp.Application.Queries;
 using RecyclingApp.Domain.Model;
 using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Model.Products;
 
 namespace RecyclingApp.Application.Mapper
 {
@@ -20,11 +21,8 @@ namespace RecyclingApp.Application.Mapper
             CreateMap<Order, OrderCreatedDto>();
 
             CreateMap<GetAllUsersQuery, PaginationFilter>();
-            CreateMap<GetOrders, PaginationFilter>();
-            CreateMap<GetAllProductsQuery, PaginationFilter>();
 
             CreateMap<GetAllUsersQuery, UserFilters>();
-            CreateMap<GetAllProductsQuery, ProductFilters>();
         }
     }
 }

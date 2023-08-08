@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Orders.Handlers.Queries;
 
-internal class GetAllOrdersQueryHandler : IRequestHandler<GetOrders, PageResponse<IReadOnlyCollection<OrderDto>>>
+internal class GetOrdersQueryHandler : IRequestHandler<GetOrders, PageResponse<IReadOnlyCollection<OrderDto>>>
 {
     private readonly IOrderSearcher _searcher;
 
-    public GetAllOrdersQueryHandler(IOrderSearcher searcher)
+    public GetOrdersQueryHandler(IOrderSearcher searcher)
         => _searcher = searcher;
 
     public async Task<PageResponse<IReadOnlyCollection<OrderDto>>> Handle(GetOrders request, CancellationToken cancellationToken)

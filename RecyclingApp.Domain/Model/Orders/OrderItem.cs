@@ -10,7 +10,7 @@ public class OrderItem
 
     private OrderItem() { }
 
-    public OrderItem(Guid orderId, Guid productId, int quantity)
+    internal OrderItem(Guid orderId, Guid productId, int quantity)
     {
         OrderId = orderId;
         ProductId = productId;

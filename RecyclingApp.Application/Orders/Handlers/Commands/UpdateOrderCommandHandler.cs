@@ -4,7 +4,7 @@ using RecyclingApp.Application.Exceptions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Application.Orders.Exceptions;
-using RecyclingApp.Application.Orders.Searchers;
+using RecyclingApp.Application.Products.Searchers;
 using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Interfaces;
 using System.Linq;
@@ -16,16 +16,16 @@ namespace RecyclingApp.Application.Orders.Handlers.Commands;
 internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder, Response<OrderDto>>
 {
     private readonly IOrderRepository _orderRepository;
-    private readonly IOrderSearcher _searcher;
+    private readonly IProductSearcher _productSearcher;
     private readonly IMapper _mapper;
 
     public UpdateOrderCommandHandler(
         IOrderRepository orderRepository,
-        IOrderSearcher searcher,
+        IProductSearcher productSearcher,
         IMapper mapper)
     {
         _orderRepository = orderRepository;
-        _searcher = searcher;
+        _productSearcher = productSearcher;
         _mapper = mapper;
     }
 
@@ -35,7 +35,7 @@ internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder, Response
         if (order is null)
             throw new OrderDoesNotExistsException(request.OrderId);
 
-        var products = await _searcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
+        var products = await _productSearcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
         if (products.Count != request.ProductIds.Count)
             throw new ProductDoesNotExistsException();
 

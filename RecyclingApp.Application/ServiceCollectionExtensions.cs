@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using RecyclingApp.Application.Orders;
+using RecyclingApp.Application.Products.Utilities;
 using System.Reflection;
 
 namespace RecyclingApp.Application;
@@ -14,5 +15,6 @@ public static class ServiceCollectionExtensions
             .AddAutoMapper(Assembly.GetExecutingAssembly())
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
-            .AddOrders();
+            .AddOrders()
+            .AddProducts();
 }

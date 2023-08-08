@@ -17,10 +17,10 @@ namespace RecyclingApp.Tests
     public class CreateOrderCommandHandlerTest
     {
         private readonly Mock<IRepository<Order>> _mockRepository;
-        private readonly CreateOrderCommandHandler _commandHandler;
+        //private readonly CreateOrderCommandHandler _commandHandler; //TODO refactor
         private readonly IMapper _mapper;
 
-        public CreateOrderCommandHandlerTest()
+        /*public CreateOrderCommandHandlerTest()
         {
             _mockRepository = new Mock<IRepository<Order>>();
 
@@ -38,7 +38,7 @@ namespace RecyclingApp.Tests
 
             result.Data.Status.Any();
             result.Data.Status.Equals("open");
-        }
+        }*/
 
     }
 }

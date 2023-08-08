@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using RecyclingApp.Application.Commands;
+using RecyclingApp.Application.Products.Commands;
 
 namespace RecyclingApp.Application.Validators
 {
-    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    public class CreateProductCommandValidator : AbstractValidator<CreateProduct>
     {
         public CreateProductCommandValidator()
         {

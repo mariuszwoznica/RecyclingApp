@@ -3,7 +3,7 @@ using MediatR;
 using RecyclingApp.Application.Exceptions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Commands;
-using RecyclingApp.Application.Orders.Searchers;
+using RecyclingApp.Application.Products.Searchers;
 using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Interfaces;
 using RecyclingApp.Domain.Model.Orders;
@@ -16,22 +16,22 @@ namespace RecyclingApp.Application.Orders.Handlers.Commands;
 internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder, Response<OrderCreatedDto>>
 {
     private readonly IRepository<Order> _orderRepository;
-    private readonly IOrderSearcher _searcher;
+    private readonly IProductSearcher _productSearcher;
     private readonly IMapper _mapper;
 
     public CreateOrderCommandHandler(
         IRepository<Order> orderRepository,
-        IOrderSearcher searcher,
+        IProductSearcher productSearcher,
         IMapper mapper)
     {
         _orderRepository = orderRepository;
-        _searcher = searcher;
+        _productSearcher = productSearcher;
         _mapper = mapper;
     }
 
     public async Task<Response<OrderCreatedDto>> Handle(CreateOrder request, CancellationToken cancellationToken)
     {
-        var products = await _searcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
+        var products = await _productSearcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
         if (products.Count != request.ProductIds.Count)
             throw new ProductDoesNotExistsException();
 

@@ -5,9 +5,8 @@ using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Queries;
 using RecyclingApp.Application.Orders.Utilities;
 using RecyclingApp.Application.Wrappers;
-using RecyclingApp.Domain.Model;
 using RecyclingApp.Domain.Model.Orders;
-using System;
+using RecyclingApp.Domain.Model.Products;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -47,9 +46,4 @@ internal class OrderSearcher : IOrderSearcher
 
         return new PageResponse<IReadOnlyCollection<OrderDto>>(orders, orders.Count);
     }
-
-    public async Task<IReadOnlyCollection<Product>> GetByIds(IReadOnlyCollection<Guid> productIds, CancellationToken cancellationToken)
-        => await _productQuery
-            .Where(p => productIds.Contains(p.Id))
-            .ToListAsync(cancellationToken);
 }

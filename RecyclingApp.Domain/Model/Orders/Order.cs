@@ -12,7 +12,7 @@ public class Order : BaseEntity, IAuditable
 
     private Order() { }
 
-    private Order(Guid id) 
+    private Order(Guid id)
     {
         Id = id;
         Status = OrderStatus.Open;
