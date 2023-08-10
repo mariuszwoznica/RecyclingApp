@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using RecyclingApp.Application.Commands;
+using RecyclingApp.Application.Users.Commands;
 using System.Linq;
 
 namespace RecyclingApp.Application.Validators
 {
-    public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
+    public class RegisterUserCommandValidator : AbstractValidator<RegisterUser>
     {
         public RegisterUserCommandValidator()  //TODO: refactor, move
         {
