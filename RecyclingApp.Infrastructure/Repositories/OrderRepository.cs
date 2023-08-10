@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
 using RecyclingApp.Infrastructure.Data;
 using System;
 using System.Threading.Tasks;

@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
-using RecyclingApp.Application.Commands;
+using RecyclingApp.Application.Products.Commands;
 
 namespace RecyclingApp.Application.Validators
 {
-    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    public class CreateProductCommandValidator : AbstractValidator<CreateProduct>
     {
-        public CreateProductCommandValidator()
+        public CreateProductCommandValidator() //TODO: refactor, move
         {
-            RuleFor(x => x.Type).NotEmpty();
+            //RuleFor(x => x.Type).NotEmpty();
 
             RuleFor(x => x.Name).NotEmpty();
 

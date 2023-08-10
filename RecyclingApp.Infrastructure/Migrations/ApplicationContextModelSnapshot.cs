@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RecyclingApp.Infrastructure.Data;
 
+#nullable disable
+
 namespace RecyclingApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
@@ -15,27 +17,21 @@ namespace RecyclingApp.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasPostgresExtension("uuid-ossp")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.13")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("RecyclingApp.Domain.Model.Order", b =>
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("RecyclingApp.Domain.Model.Orders.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TotalItems")
                         .HasColumnType("integer");
 
                     b.Property<Guid?>("UserId")
@@ -48,7 +44,7 @@ namespace RecyclingApp.Infrastructure.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("RecyclingApp.Domain.Model.OrderItem", b =>
+            modelBuilder.Entity("RecyclingApp.Domain.Model.Orders.OrderItem", b =>
                 {
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
@@ -64,23 +60,23 @@ namespace RecyclingApp.Infrastructure.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("RecyclingApp.Domain.Model.Product", b =>
+            modelBuilder.Entity("RecyclingApp.Domain.Model.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -94,7 +90,7 @@ namespace RecyclingApp.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
@@ -107,23 +103,23 @@ namespace RecyclingApp.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("RecyclingApp.Domain.Model.Order", b =>
+            modelBuilder.Entity("RecyclingApp.Domain.Model.Orders.Order", b =>
                 {
                     b.HasOne("RecyclingApp.Domain.Model.User", null)
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("RecyclingApp.Domain.Model.OrderItem", b =>
+            modelBuilder.Entity("RecyclingApp.Domain.Model.Orders.OrderItem", b =>
                 {
-                    b.HasOne("RecyclingApp.Domain.Model.Order", null)
+                    b.HasOne("RecyclingApp.Domain.Model.Orders.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RecyclingApp.Domain.Model.Order", b =>
+            modelBuilder.Entity("RecyclingApp.Domain.Model.Orders.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });

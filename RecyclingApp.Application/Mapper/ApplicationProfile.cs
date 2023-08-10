@@ -11,19 +11,11 @@ namespace RecyclingApp.Application.Mapper
         public ApplicationProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<Order, OrderDto>();
-            CreateMap<Product, ProductDto>();
-            CreateMap<OrderItem, OrderItemDto>();
-
-            CreateMap<Order, OrderCreatedDto>();
+           
 
             CreateMap<GetAllUsersQuery, PaginationFilter>();
-            CreateMap<GetAllOrdersQuery, PaginationFilter>();
-            CreateMap<GetAllProductsQuery, PaginationFilter>();
 
             CreateMap<GetAllUsersQuery, UserFilters>();
-            CreateMap<GetAllOrdersQuery, OrderFilters>();
-            CreateMap<GetAllProductsQuery, ProductFilters>();
         }
     }
 }

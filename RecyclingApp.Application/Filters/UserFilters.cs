@@ -1,6 +1,6 @@
 ﻿namespace RecyclingApp.Application.Filters
 {
-    public class UserFilters
+    public class UserFilters //TODO: remove
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }

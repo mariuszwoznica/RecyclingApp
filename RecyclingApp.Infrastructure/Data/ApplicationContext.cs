@@ -2,6 +2,8 @@
 using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Domain.Common;
 using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Model.Products;
 using System;
 using System.Linq;
 using System.Threading;
@@ -29,16 +31,7 @@ namespace RecyclingApp.Infrastructure.Data
                 modelBuilder.Entity(entityType.ClrType)
                     .Property<DateTime>("CreatedAt");
             }
-
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes()
-                .Where(entity => entity.ClrType.IsAssignableFrom(typeof(BaseEntity))))
-            {
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property<Guid>("Id").HasDefaultValueSql("uuid_generate_v4()");
-            }
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.HasPostgresExtension("uuid-ossp");
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

@@ -6,7 +6,7 @@ namespace RecyclingApp.Application.Validators
 {
     public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
     {
-        public RegisterUserCommandValidator()
+        public RegisterUserCommandValidator()  //TODO: refactor, move
         {
             RuleFor(x => x.FirstName)
                 .NotEmpty()

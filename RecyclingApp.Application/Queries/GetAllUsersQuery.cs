@@ -5,7 +5,6 @@ using RecyclingApp.Application.Filters;
 using RecyclingApp.Application.Helpers;
 using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Application.Models;
-using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Model;
 using System.Collections.Generic;
 using System.Threading;
@@ -30,7 +29,7 @@ namespace RecyclingApp.Application.Queries
             OrderBy = orderBy;
         }
 
-        public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, Response<IEnumerable<UserDto>>>
+        /*public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, Response<IEnumerable<UserDto>>>
         {
             private readonly IApplicationDbContext _context;
             private readonly IMapper _mapper;
@@ -50,12 +49,12 @@ namespace RecyclingApp.Application.Queries
                 var users = await query
                     .SearchUsers(userParamiters)
                     .ApplaySorting(userParamiters.OrderBy)
-                    .ApplayPaging(parameters.Page, parameters.Limit)
+                    .ApplyPaging(parameters.Page, parameters.Limit)
                     .ToListAsync(cancellationToken: cancellationToken);
 
-                return new PagedResponse<IEnumerable<UserDto>>(_mapper.Map<IEnumerable<UserDto>>(users), users.Count);
+                return new PageResponse<IEnumerable<UserDto>>(_mapper.Map<IEnumerable<UserDto>>(users), new PagingInfo());
             }
-        }
+        }*/
 
     }
 }
