@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Moq;
-using RecyclingApp.Application.Commands;
 using RecyclingApp.Application.Mapper;
+using RecyclingApp.Application.Users.Handlers.Commands;
 using RecyclingApp.Domain.Interfaces;
 using RecyclingApp.Domain.Model;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using static RecyclingApp.Application.Commands.RegisterUserCommand;
+using static RecyclingApp.Application.Users.Handlers.Commands.RegisterUserCommand;
 
 namespace RecyclingApp.Tests
 {
