@@ -18,7 +18,7 @@ namespace RecyclingApp.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        /*[HttpGet] TODO refactor
         public async Task<IActionResult> GetUsers([FromQuery] GetUsersRequest request)
         {
             return Ok(await _mediator.Send(new GetAllUsersQuery(request.Page, request.Limit, request.FirstName,
@@ -30,6 +30,6 @@ namespace RecyclingApp.WebAPI.Controllers
         {
             var user = Ok(await _mediator.Send(new RegisterUserCommand(request.FirstName, request.LastName)));
             return Created(string.Empty, user);
-        }
+        }*/
     }
 }

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 namespace RecyclingApp.Application.Helpers;
 
+[Obsolete]//TODO: remove
 internal static class FilteringExtensions
 {
     public static IQueryable<T> ApplyPaging<T>(this IQueryable<T> query, int page, int limit)

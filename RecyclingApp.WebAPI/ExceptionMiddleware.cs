@@ -8,7 +8,7 @@ namespace RecyclingApp.Application;
 
 internal sealed class ExceptionMiddleware : IMiddleware
 {
-    public ExceptionMiddleware() { }
+    public ExceptionMiddleware() { }  //TODO: send custom errors(System.Exception) to user
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {

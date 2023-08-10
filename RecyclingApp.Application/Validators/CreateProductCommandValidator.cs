@@ -5,9 +5,9 @@ namespace RecyclingApp.Application.Validators
 {
     public class CreateProductCommandValidator : AbstractValidator<CreateProduct>
     {
-        public CreateProductCommandValidator()
+        public CreateProductCommandValidator() //TODO: refactor, move
         {
-            RuleFor(x => x.Type).NotEmpty();
+            //RuleFor(x => x.Type).NotEmpty();
 
             RuleFor(x => x.Name).NotEmpty();
 

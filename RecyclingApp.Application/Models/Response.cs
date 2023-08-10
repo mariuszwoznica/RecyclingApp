@@ -1,5 +1,8 @@
-﻿namespace RecyclingApp.Application.Wrappers
+﻿using System;
+
+namespace RecyclingApp.Application.Models
 {
+    [Obsolete] //TODO: remove
     public class Response<T>
     {
         public T Data { get; set; }

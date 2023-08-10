@@ -5,9 +5,6 @@ using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Products.Commands;
 using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Queries;
-using RecyclingApp.Application.RequestParamiters;
-using RecyclingApp.Application.Wrappers;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,9 +19,9 @@ public class ProductsController : ControllerBase
     public ProductsController(IMediator mediator)
         => _mediator = mediator;
 
-    [HttpGet]
-    [ProducesResponseType(typeof(PageResponse<IReadOnlyCollection<ProductDto>>), StatusCodes.Status200OK)]
-    public async Task<PageResponse<IReadOnlyCollection<ProductDto>>> GetProducts(
+    /*[HttpGet]  //TODO: Find exception
+    [ProducesResponseType(typeof(PageResponse<ProductResponse>), StatusCodes.Status200OK)]
+    public async Task<PageResponse<ProductResponse>> GetProducts(
         [FromQuery] int pageNumber,
         [FromQuery] int pageSize,
         [FromQuery] string? name,
@@ -48,12 +45,12 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto data, CancellationToken cancellationToken)
     {
-        var product = await _mediator.Send(
+        await _mediator.Send(
             request: new CreateProduct(
                 Type: data.Type,
                 Name: data.Name,
                 Price: data.Price),
             cancellationToken: cancellationToken);
-        return Created(string.Empty, product);
-    }
+        return Created(string.Empty, cancellationToken);
+    }*/
 }

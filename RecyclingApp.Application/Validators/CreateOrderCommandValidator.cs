@@ -5,7 +5,7 @@ namespace RecyclingApp.Application.Validators
 {
     public class CreateOrderCommandValidator : AbstractValidator<CreateOrder>
     {
-        public CreateOrderCommandValidator()
+        public CreateOrderCommandValidator() //TODO: refactor, move
         {
 
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RecyclingApp.Application.RequestParamiters;
+namespace RecyclingApp.Application.Orders.Models;
 
 public record CreateOrderDto(
     IReadOnlyCollection<Guid> ProductIds,

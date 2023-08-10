@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using MediatR;
-using RecyclingApp.Application.Exceptions;
-using RecyclingApp.Application.Models;
+﻿using MediatR;
 using RecyclingApp.Application.Orders.Commands;
+using RecyclingApp.Application.Products.Exceptions;
 using RecyclingApp.Application.Products.Searchers;
-using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Interfaces;
 using RecyclingApp.Domain.Model.Orders;
 using System.Linq;
@@ -13,23 +10,20 @@ using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Orders.Handlers.Commands;
 
-internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder, Response<OrderCreatedDto>>
+internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder>
 {
     private readonly IRepository<Order> _orderRepository;
     private readonly IProductSearcher _productSearcher;
-    private readonly IMapper _mapper;
 
     public CreateOrderCommandHandler(
         IRepository<Order> orderRepository,
-        IProductSearcher productSearcher,
-        IMapper mapper)
+        IProductSearcher productSearcher)
     {
         _orderRepository = orderRepository;
         _productSearcher = productSearcher;
-        _mapper = mapper;
     }
 
-    public async Task<Response<OrderCreatedDto>> Handle(CreateOrder request, CancellationToken cancellationToken)
+    public async Task Handle(CreateOrder request, CancellationToken cancellationToken)
     {
         var products = await _productSearcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
         if (products.Count != request.ProductIds.Count)
@@ -43,7 +37,5 @@ internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder, Response
 
         _orderRepository.Add(entity: order);
         await _orderRepository.SaveChangesAsync();
-
-        return new Response<OrderCreatedDto>(_mapper.Map<OrderCreatedDto>(order));
     }
 }

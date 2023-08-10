@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Application.Orders;
-using RecyclingApp.Application.Products.Utilities;
+using RecyclingApp.Application.Products;
 using System.Reflection;
 
 namespace RecyclingApp.Application;
@@ -17,4 +18,8 @@ public static class ServiceCollectionExtensions
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
             .AddOrders()
             .AddProducts();
+
+    internal static IServiceCollection RegisterResponseBuilder<TIn, TResponse, TBuilder>(this IServiceCollection serviceCollection)
+        where TBuilder : class, IResponseBuilder<TIn, TResponse>
+        => serviceCollection.AddScoped<IResponseBuilder<TIn, TResponse>, TBuilder>();
 }

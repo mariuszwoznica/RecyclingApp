@@ -1,15 +1,14 @@
 ﻿using MediatR;
 using RecyclingApp.Application.Models;
-using RecyclingApp.Application.Wrappers;
+using RecyclingApp.Application.Orders.Models;
 using System;
-using System.Collections.Generic;
 
 namespace RecyclingApp.Application.Orders.Queries;
 
 public record GetOrders(
     int Page, 
-    int Limit,
-    OrderStatusContract? Status,
+    int PageSize,
+    OrderStatus? Status,
     DateTime? MinCreatedAt, 
     DateTime? MaxCreatedAt,
-    string[]? Sorting) : IRequest<PageResponse<IReadOnlyCollection<OrderDto>>>;
+    string[]? Sorting) : IRequest<PageResponse<OrderResponse>>;

@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Products.Models;
-using RecyclingApp.Application.Wrappers;
-using System.Collections.Generic;
 
 namespace RecyclingApp.Application.Products.Queries;
 
@@ -13,4 +11,4 @@ public record GetProducts(
     ProductType? Type,
     decimal? MinPrice,
     decimal? MaxPrice,
-    string[]? Sorting) : IRequest<PageResponse<IReadOnlyCollection<ProductDto>>>;
+    string[]? Sorting) : IRequest<PageResponse<ProductResponse>>;

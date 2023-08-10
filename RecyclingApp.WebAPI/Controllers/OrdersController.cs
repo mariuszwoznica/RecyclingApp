@@ -2,13 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecyclingApp.Application.Models;
-using RecyclingApp.Application.Orders;
 using RecyclingApp.Application.Orders.Commands;
+using RecyclingApp.Application.Orders.Models;
 using RecyclingApp.Application.Orders.Queries;
-using RecyclingApp.Application.RequestParamiters;
-using RecyclingApp.Application.Wrappers;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,11 +21,11 @@ public class OrdersController : ControllerBase
         => _mediator = mediator;
 
     [HttpGet]
-    [ProducesResponseType(typeof(PageResponse<IReadOnlyCollection<OrderDto>>), StatusCodes.Status200OK)]
-    public async Task<PageResponse<IReadOnlyCollection<OrderDto>>> GetOrders(
+    [ProducesResponseType(typeof(PageResponse<OrderResponse>), StatusCodes.Status200OK)]
+    public async Task<PageResponse<OrderResponse>> GetOrders(
         [FromQuery] int pageNumber,
         [FromQuery] int pageSize,
-        [FromQuery] OrderStatusContract? orderStatus,
+        [FromQuery] OrderStatus? orderStatus,
         [FromQuery] DateTime? minCreatedAt,
         [FromQuery] DateTime? maxCreatedAt,
         [FromQuery] string[]? sorting,
@@ -36,7 +33,7 @@ public class OrdersController : ControllerBase
         => await _mediator.Send(
             request: new GetOrders(
                 Page: pageNumber,
-                Limit: pageSize,
+                PageSize: pageSize,
                 Status: orderStatus,
                 MinCreatedAt: minCreatedAt,
                 MaxCreatedAt: maxCreatedAt,
@@ -47,12 +44,12 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDto data, CancellationToken cancellationToken)
     {
-        var request = new CreateOrder(
-            ProductIds: data.ProductIds,
-            Quantity: data.Quantity
-        );
-        var order = await _mediator.Send(request: request, cancellationToken: cancellationToken);
-        return Created(string.Empty, order);
+        await _mediator.Send(
+            request: new CreateOrder(
+                ProductIds: data.ProductIds,
+                Quantity: data.Quantity),
+            cancellationToken: cancellationToken);
+        return Created(string.Empty, cancellationToken);
     }
 
     [HttpPut("{orderId:guid}")]

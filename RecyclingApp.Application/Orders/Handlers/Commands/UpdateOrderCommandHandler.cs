@@ -1,11 +1,8 @@
-﻿using AutoMapper;
-using MediatR;
-using RecyclingApp.Application.Exceptions;
-using RecyclingApp.Application.Models;
+﻿using MediatR;
 using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Application.Orders.Exceptions;
+using RecyclingApp.Application.Products.Exceptions;
 using RecyclingApp.Application.Products.Searchers;
-using RecyclingApp.Application.Wrappers;
 using RecyclingApp.Domain.Interfaces;
 using System.Linq;
 using System.Threading;
@@ -13,23 +10,20 @@ using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Orders.Handlers.Commands;
 
-internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder, Response<OrderDto>>
+internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IProductSearcher _productSearcher;
-    private readonly IMapper _mapper;
 
     public UpdateOrderCommandHandler(
         IOrderRepository orderRepository,
-        IProductSearcher productSearcher,
-        IMapper mapper)
+        IProductSearcher productSearcher)
     {
         _orderRepository = orderRepository;
         _productSearcher = productSearcher;
-        _mapper = mapper;
     }
 
-    public async Task<Response<OrderDto>> Handle(UpdateOrder request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateOrder request, CancellationToken cancellationToken)
     {
         var order = await _orderRepository.GetWithItemsAsync(id: request.OrderId);
         if (order is null)
@@ -50,7 +44,5 @@ internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder, Response
 
         _orderRepository.Update(entity: order);
         await _orderRepository.SaveChangesAsync();
-
-        return new Response<OrderDto>(_mapper.Map<OrderDto>(order));
     }
 }

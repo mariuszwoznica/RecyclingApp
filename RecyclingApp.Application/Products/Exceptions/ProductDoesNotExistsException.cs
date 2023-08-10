@@ -1,12 +1,9 @@
 ﻿using System;
 
-namespace RecyclingApp.Application.Exceptions;
+namespace RecyclingApp.Application.Products.Exceptions;
 
 internal class ProductDoesNotExistsException : Exception
 {
-    //public Guid ProductId { get; }
-
     public ProductDoesNotExistsException()
         : base($"Product does not exist.") { }
-        //=> ProductId = productId;
 }

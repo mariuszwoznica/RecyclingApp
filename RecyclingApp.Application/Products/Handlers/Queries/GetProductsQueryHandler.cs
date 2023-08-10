@@ -1,30 +1,33 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
+using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Queries;
 using RecyclingApp.Application.Products.Searchers;
-using RecyclingApp.Application.Wrappers;
-using System.Collections.Generic;
+using RecyclingApp.Domain.Model.Products;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Products.Handlers.Queries;
 
-internal class GetProductsQueryHandler : IRequestHandler<GetProducts, Response<IReadOnlyCollection<ProductDto>>>
+internal class GetProductsQueryHandler : IRequestHandler<GetProducts, PageResponse<ProductResponse>>
 {
     private readonly IProductSearcher _searcher;
-    private readonly IMapper _mapper;
+    private readonly IResponseBuilder<Product, ProductResponse> _responseBuilder;
 
-    public GetProductsQueryHandler(IProductSearcher searcher, IMapper mapper)
+    public GetProductsQueryHandler(IProductSearcher searcher, IResponseBuilder<Product, ProductResponse> responseBuilder)
     {
         _searcher = searcher;
-        _mapper = mapper;
+        _responseBuilder = responseBuilder;
     }
 
-    public async Task<Response<IReadOnlyCollection<ProductDto>>> Handle(GetProducts request, CancellationToken cancellationToken)
+    public async Task<PageResponse<ProductResponse>> Handle(GetProducts request, CancellationToken cancellationToken)
     {
         var result = await _searcher.GetList(query: request, cancellationToken: cancellationToken);
 
-        return new PageResponse<IReadOnlyCollection<ProductDto>>(_mapper.Map<IReadOnlyCollection<ProductDto>>(result), result.Data.Count);
+        return new PageResponse<ProductResponse>(
+            results: result.Results.Select(p => _responseBuilder.Build(input: p)).ToList(), 
+            pageInfo: result.PageInfo);
     }
 }
