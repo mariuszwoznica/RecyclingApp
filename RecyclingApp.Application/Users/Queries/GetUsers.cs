@@ -9,4 +9,4 @@ public record GetUsers(
     int PageSize,
     string? FirstName,
     string? LastName,
-    string[]? Sorting) : IRequest<PageResponse<UserResponse>>;
+    string[]? Sorting) : IRequest<PagedResponse<UserResponse>>;

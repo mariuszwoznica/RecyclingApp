@@ -8,7 +8,7 @@ namespace RecyclingApp.Application.Utilities;
 
 public static class PagingExtensions
 {
-    public static async Task<PageResponse<T>> TakePage<T>(this IQueryable<T> query, int pageNumber, int pageSize,
+    public static async Task<PagedResponse<T>> TakePage<T>(this IQueryable<T> query, int pageNumber, int pageSize,
         CancellationToken cancellationToken)
     {
         var results = await query
@@ -16,7 +16,7 @@ public static class PagingExtensions
             .Take(pageSize)
             .ToListAsync(cancellationToken);
 
-        return new PageResponse<T>(
+        return new PagedResponse<T>(
             results: results,
             pageInfo: new PagingInfo(
                 pageNumber: pageNumber,

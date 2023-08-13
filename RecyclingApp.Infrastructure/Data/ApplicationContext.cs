@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecyclingApp.Application.Interfaces;
+using RecyclingApp.Application.Abstractions;
 using RecyclingApp.Domain.Common;
 using RecyclingApp.Domain.Model;
 using RecyclingApp.Domain.Model.Orders;

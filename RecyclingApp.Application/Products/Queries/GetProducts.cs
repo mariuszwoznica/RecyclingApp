@@ -11,4 +11,4 @@ public record GetProducts(
     ProductType? Type,
     decimal? MinPrice,
     decimal? MaxPrice,
-    string[]? Sorting) : IRequest<PageResponse<ProductResponse>>;
+    string[]? Sorting) : IRequest<PagedResponse<ProductResponse>>;

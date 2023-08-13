@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecyclingApp.Application.Helpers;
-using RecyclingApp.Application.Interfaces;
+using RecyclingApp.Application.Abstractions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Products.Queries;
 using RecyclingApp.Application.Products.Utilities;
@@ -21,7 +20,7 @@ internal class ProductSearcher : IProductSearcher
     public ProductSearcher(IApplicationDbContext context)
         => _query = context.Set<Product>().AsNoTracking();
 
-    public async Task<PageResponse<Product>> GetList(GetProducts query, CancellationToken cancellationToken)
+    public async Task<PagedResponse<Product>> GetList(GetProducts query, CancellationToken cancellationToken)
         => await _query
             .Where(p => query.Name.IsNullOrWhiteSpace() || p.Name == query.Name)
             .Where(p => !query.Type.HasValue || p.Type.Equals(query.Type))

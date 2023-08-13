@@ -8,5 +8,5 @@ namespace RecyclingApp.Application.Users.Searchers;
 
 internal interface IUserSearcher
 {
-    Task<PageResponse<User>> GetList(GetUsers query, CancellationToken cancellationToken);
+    Task<PagedResponse<User>> GetList(GetUsers query, CancellationToken cancellationToken);
 }

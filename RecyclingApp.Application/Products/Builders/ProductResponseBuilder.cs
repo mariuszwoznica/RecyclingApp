@@ -1,4 +1,4 @@
-﻿using RecyclingApp.Application.Interfaces;
+﻿using RecyclingApp.Application.Abstractions;
 using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Utilities;
 using RecyclingApp.Domain.Model.Products;
