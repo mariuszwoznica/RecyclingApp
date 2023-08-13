@@ -21,8 +21,8 @@ public class OrdersController : ControllerBase
         => _mediator = mediator;
 
     [HttpGet]
-    [ProducesResponseType(typeof(PageResponse<OrderResponse>), StatusCodes.Status200OK)]
-    public async Task<PageResponse<OrderResponse>> GetOrders(
+    [ProducesResponseType(typeof(PagedResponse<OrderResponse>), StatusCodes.Status200OK)]
+    public async Task<PagedResponse<OrderResponse>> GetOrders(
         [FromQuery] int pageNumber,
         [FromQuery] int pageSize,
         [FromQuery] OrderStatus? orderStatus,

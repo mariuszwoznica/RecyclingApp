@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RecyclingApp.Application.Interfaces;
+using RecyclingApp.Application.Abstractions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Users.Models;
 using RecyclingApp.Application.Users.Queries;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Users.Handlers.Queries;
 
-internal class GetUsersQueryHandler : IRequestHandler<GetUsers, PageResponse<UserResponse>>
+internal class GetUsersQueryHandler : IRequestHandler<GetUsers, PagedResponse<UserResponse>>
 {
     private readonly IUserSearcher _searcher;
     private readonly IResponseBuilder<User, UserResponse> _responseBuilder;
@@ -22,11 +22,11 @@ internal class GetUsersQueryHandler : IRequestHandler<GetUsers, PageResponse<Use
         _responseBuilder = responseBuilder;
     }
 
-    public async Task<PageResponse<UserResponse>> Handle(GetUsers request, CancellationToken cancellationToken)
+    public async Task<PagedResponse<UserResponse>> Handle(GetUsers request, CancellationToken cancellationToken)
     {
         var result = await _searcher.GetList(query: request, cancellationToken: cancellationToken);
 
-        return new PageResponse<UserResponse>(
+        return new PagedResponse<UserResponse>(
             results: result.Results.Select(u => _responseBuilder.Build(input: u)).ToList(),
             pageInfo: result.PageInfo);
     }

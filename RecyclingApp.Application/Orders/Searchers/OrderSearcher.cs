@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecyclingApp.Application.Interfaces;
+using RecyclingApp.Application.Abstractions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Models;
 using RecyclingApp.Application.Orders.Queries;
@@ -24,7 +24,7 @@ internal class OrderSearcher : IOrderSearcher
         _productQuery = context.Set<Product>().AsNoTracking();
     }
 
-    public async Task<PageResponse<OrderResponse>> GetList(GetOrders query, CancellationToken cancellationToken)
+    public async Task<PagedResponse<OrderResponse>> GetList(GetOrders query, CancellationToken cancellationToken)
         => await _query
             .Where(o => !query.Status.HasValue || o.Status.Equals(query.Status))
             .ApplyCreatedAtFilter(minCreatedAt: query.MinCreatedAt, maxCreatedAt: query.MaxCreatedAt) 

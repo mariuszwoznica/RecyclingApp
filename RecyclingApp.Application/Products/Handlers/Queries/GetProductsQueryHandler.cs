@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RecyclingApp.Application.Interfaces;
+using RecyclingApp.Application.Abstractions;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Queries;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RecyclingApp.Application.Products.Handlers.Queries;
 
-internal class GetProductsQueryHandler : IRequestHandler<GetProducts, PageResponse<ProductResponse>>
+internal class GetProductsQueryHandler : IRequestHandler<GetProducts, PagedResponse<ProductResponse>>
 {
     private readonly IProductSearcher _searcher;
     private readonly IResponseBuilder<Product, ProductResponse> _responseBuilder;
@@ -22,11 +22,11 @@ internal class GetProductsQueryHandler : IRequestHandler<GetProducts, PageRespon
         _responseBuilder = responseBuilder;
     }
 
-    public async Task<PageResponse<ProductResponse>> Handle(GetProducts request, CancellationToken cancellationToken)
+    public async Task<PagedResponse<ProductResponse>> Handle(GetProducts request, CancellationToken cancellationToken)
     {
         var result = await _searcher.GetList(query: request, cancellationToken: cancellationToken);
 
-        return new PageResponse<ProductResponse>(
+        return new PagedResponse<ProductResponse>(
             results: result.Results.Select(p => _responseBuilder.Build(input: p)).ToList(), 
             pageInfo: result.PageInfo);
     }

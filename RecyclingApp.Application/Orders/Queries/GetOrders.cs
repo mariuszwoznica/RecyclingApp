@@ -11,4 +11,4 @@ public record GetOrders(
     OrderStatus? Status,
     DateTime? MinCreatedAt, 
     DateTime? MaxCreatedAt,
-    string[]? Sorting) : IRequest<PageResponse<OrderResponse>>;
+    string[]? Sorting) : IRequest<PagedResponse<OrderResponse>>;

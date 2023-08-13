@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RecyclingApp.Application;
 using RecyclingApp.Infrastructure;
+using RecyclingApp.WebAPI.Middleware;
 
 namespace RecyclingApp.WebAPI;
 

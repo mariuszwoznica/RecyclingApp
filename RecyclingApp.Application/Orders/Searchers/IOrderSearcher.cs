@@ -8,5 +8,5 @@ namespace RecyclingApp.Application.Orders.Searchers;
 
 internal interface IOrderSearcher
 {
-    Task<PageResponse<OrderResponse>> GetList(GetOrders query, CancellationToken cancellationToken);
+    Task<PagedResponse<OrderResponse>> GetList(GetOrders query, CancellationToken cancellationToken);
 }

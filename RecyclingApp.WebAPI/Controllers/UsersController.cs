@@ -20,8 +20,8 @@ public class UsersController : ControllerBase
         => _mediator = mediator;
 
     [HttpGet]
-    [ProducesResponseType(typeof(PageResponse<UserResponse>), StatusCodes.Status200OK)]
-    public async Task<PageResponse<UserResponse>> GetUsers(
+    [ProducesResponseType(typeof(PagedResponse<UserResponse>), StatusCodes.Status200OK)]
+    public async Task<PagedResponse<UserResponse>> GetUsers(
         [FromQuery] int pageNumber,
         [FromQuery] int pageSize,
         [FromQuery] string? firstName,

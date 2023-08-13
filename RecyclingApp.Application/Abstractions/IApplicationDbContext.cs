@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RecyclingApp.Application.Interfaces;
+namespace RecyclingApp.Application.Abstractions;
 
 public interface IApplicationDbContext
 {

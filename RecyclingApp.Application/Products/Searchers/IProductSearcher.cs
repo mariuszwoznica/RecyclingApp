@@ -10,6 +10,6 @@ namespace RecyclingApp.Application.Products.Searchers;
 
 internal interface IProductSearcher
 {
-    Task<PageResponse<Product>> GetList(GetProducts query, CancellationToken cancellationToken);
+    Task<PagedResponse<Product>> GetList(GetProducts query, CancellationToken cancellationToken);
     Task<IReadOnlyCollection<Product>> GetByIds(IReadOnlyCollection<Guid> productIds, CancellationToken cancellationToken);
 }

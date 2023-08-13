@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using RecyclingApp.Application.Interfaces;
+using RecyclingApp.Application.Abstractions;
+using RecyclingApp.Application.Behaviors;
 using RecyclingApp.Application.Orders;
 using RecyclingApp.Application.Products;
 using RecyclingApp.Application.Users;
