@@ -11,7 +11,7 @@ namespace RecyclingApp.Application.Validators
             RuleFor(x => x.FirstName)
                 .NotEmpty()
                 .Length(2, 50)
-                .Must(ValidName).WithMessage("{PropertyName} zawiera niepoprawne znaki");
+            .Must(ValidName).WithMessage("{PropertyName} zawiera niepoprawne znaki");
 
             RuleFor(x => x.LastName)
                 .NotEmpty()

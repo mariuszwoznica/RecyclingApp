@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RecyclingApp.Application.Helpers;
 using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Products.Queries;
@@ -22,7 +23,7 @@ internal class ProductSearcher : IProductSearcher
 
     public async Task<PageResponse<Product>> GetList(GetProducts query, CancellationToken cancellationToken)
         => await _query
-            .Where(p => string.IsNullOrWhiteSpace(query.Name) || p.Name == query.Name)
+            .Where(p => query.Name.IsNullOrWhiteSpace() || p.Name == query.Name)
             .Where(p => !query.Type.HasValue || p.Type.Equals(query.Type))
             .ApplyPriceFilter(minPrice: query.MinPrice, maxPrice: query.MaxPrice)
             .ApplySorting(sortingParams: query.Sorting)

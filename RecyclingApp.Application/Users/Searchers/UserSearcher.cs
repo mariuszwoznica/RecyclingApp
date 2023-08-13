@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RecyclingApp.Application.Helpers;
 using RecyclingApp.Application.Interfaces;
 using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Users.Queries;
@@ -20,8 +21,8 @@ internal class UserSearcher : IUserSearcher
 
     public async Task<PageResponse<User>> GetList(GetUsers query, CancellationToken cancellationToken)
         => await _query
-            .Where(u => string.IsNullOrWhiteSpace(query.FirstName) || u.FirstName.ToLower() == query.FirstName.ToLower())
-            .Where(u => string.IsNullOrWhiteSpace(query.LastName) || u.LastName.ToLower() == query.LastName.ToLower())
+            .Where(u => query.FirstName.IsNullOrWhiteSpace() || u.FirstName.ToLower() == query.FirstName!.ToLower())
+            .Where(u => query.LastName.IsNullOrWhiteSpace() || u.LastName.ToLower() == query.LastName!.ToLower())
             .ApplySorting(sortingParams: query.Sorting)
             .TakePage(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
 }

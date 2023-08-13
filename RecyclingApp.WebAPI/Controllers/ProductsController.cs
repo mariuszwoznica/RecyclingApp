@@ -16,10 +16,10 @@ public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public ProductsController(IMediator mediator)
+    public ProductsController(IMediator mediator) 
         => _mediator = mediator;
 
-    /*[HttpGet]  //TODO: Find exception
+    /*[HttpGet] //TODO: Find exception
     [ProducesResponseType(typeof(PageResponse<ProductResponse>), StatusCodes.Status200OK)]
     public async Task<PageResponse<ProductResponse>> GetProducts(
         [FromQuery] int pageNumber,

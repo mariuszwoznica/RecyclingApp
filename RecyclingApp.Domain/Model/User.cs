@@ -1,5 +1,6 @@
 ﻿using RecyclingApp.Domain.Common;
 using RecyclingApp.Domain.Model.Orders;
+using System;
 using System.Collections.Generic;
 
 namespace RecyclingApp.Domain.Model;
@@ -12,13 +13,13 @@ public class User : BaseEntity, IAuditable
 
     private User() { }
 
-    public User(string firstName, string lastName)
+    public User(Guid id, string firstName, string lastName)
     {
+        Id = id;
         FirstName = firstName;
         LastName = lastName;
     }
 
     public static User Create(string firstName, string lastName)
-        => new User(firstName, lastName);
-
+        => new User(Guid.NewGuid(), firstName, lastName);
 }

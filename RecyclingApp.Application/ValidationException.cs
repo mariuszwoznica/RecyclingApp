@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RecyclingApp.Application
+namespace RecyclingApp.Application;
+
+public class ValidationException : Exception
 {
-    public sealed class ValidationException : Exception
-    {
-        public IReadOnlyDictionary<string, string[]> ErrorsDictionary { get; }
+    public IReadOnlyDictionary<string, string[]> Errors { get; }
 
-        public ValidationException(IReadOnlyDictionary<string, string[]> errorsDictionary)
-        {
-            ErrorsDictionary = errorsDictionary;
-        }
-
-    }
+    public ValidationException(IReadOnlyDictionary<string, string[]> errors)
+        : base("Received object has invalid fields.")
+        => Errors = errors;
 }
