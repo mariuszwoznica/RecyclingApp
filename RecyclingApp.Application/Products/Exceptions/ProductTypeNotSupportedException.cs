@@ -1,4 +1,4 @@
-﻿using RecyclingApp.Domain.Model.Products;
+﻿using RecyclingApp.Domain.Entities.Products;
 using System;
 using ProductTypeContract = RecyclingApp.Application.Products.Models.ProductType;
 

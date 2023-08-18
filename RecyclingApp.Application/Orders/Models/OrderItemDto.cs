@@ -1,4 +1,4 @@
-﻿using RecyclingApp.Domain.Model.Products;
+﻿using RecyclingApp.Domain.Entities.Products;
 
 namespace RecyclingApp.Application.Orders.Models;
 

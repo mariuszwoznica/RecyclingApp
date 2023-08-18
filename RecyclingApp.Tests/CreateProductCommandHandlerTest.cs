@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Moq;
-using RecyclingApp.Application.Mapper;
 using RecyclingApp.Application.Products.Commands;
 using RecyclingApp.Application.Products.Handlers.Commands;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model.Products;
+using RecyclingApp.Domain.Entities.Products;
+using RecyclingApp.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;

@@ -1,6 +1,6 @@
 ﻿using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Products.Queries;
-using RecyclingApp.Domain.Model.Products;
+using RecyclingApp.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Threading;

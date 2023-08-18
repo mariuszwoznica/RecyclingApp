@@ -12,8 +12,8 @@ namespace RecyclingApp.Application;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
-        => services
+    public static IServiceCollection AddApplication(this IServiceCollection serviceCollection)
+        => serviceCollection
             .AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()))
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())

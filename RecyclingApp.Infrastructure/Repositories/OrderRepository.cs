@@ -1,19 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model.Orders;
-using RecyclingApp.Infrastructure.Data;
+using RecyclingApp.Domain.Entities.Orders;
+using RecyclingApp.Domain.Repositories;
 using System;
 using System.Threading.Tasks;
 
-namespace RecyclingApp.Infrastructure.Repositories
-{
-    public class OrderRepository : Repository<Order>, IOrderRepository
-    {
-        public OrderRepository(ApplicationContext context) : base(context) { }
+namespace RecyclingApp.Infrastructure.Repositories;
 
-        public async Task<Order> GetWithItemsAsync(Guid id)
-        {
-            return await _context.Orders.Include("OrderItems").FirstAsync(o => o.Id == id);
-        }
-    }
+public class OrderRepository : Repository<Order>, IOrderRepository
+{
+    public OrderRepository(ApplicationContext context) : base(context) { }
+
+    public async Task<Order> GetWithItemsAsync(Guid id)
+        => await _context.Orders.Include("OrderItems").FirstAsync(o => o.Id == id);
 }

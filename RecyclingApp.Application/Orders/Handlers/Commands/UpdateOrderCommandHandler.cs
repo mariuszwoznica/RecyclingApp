@@ -3,7 +3,7 @@ using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Application.Orders.Exceptions;
 using RecyclingApp.Application.Products.Exceptions;
 using RecyclingApp.Application.Products.Searchers;
-using RecyclingApp.Domain.Interfaces;
+using RecyclingApp.Domain.Repositories;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

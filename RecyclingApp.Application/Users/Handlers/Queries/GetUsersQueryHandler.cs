@@ -4,7 +4,7 @@ using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Users.Models;
 using RecyclingApp.Application.Users.Queries;
 using RecyclingApp.Application.Users.Searchers;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Entities;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

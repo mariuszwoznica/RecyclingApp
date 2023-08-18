@@ -2,25 +2,24 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RecyclingApp.Application.Abstractions;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Infrastructure.Data;
+using RecyclingApp.Domain.Repositories;
+using RecyclingApp.Infrastructure.Interceptors;
 using RecyclingApp.Infrastructure.Repositories;
 
-namespace RecyclingApp.Infrastructure
+namespace RecyclingApp.Infrastructure;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
-    {
-        public static IServiceCollection AddInfrastructure(
-            this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<ApplicationContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DatabaseConnection")));
-
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationContext>());
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IOrderRepository, OrderRepository>();
-
-            return services;
-        }
-    }
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection serviceCollection, IConfiguration configuration)
+            => serviceCollection
+                .AddSingleton<AuditableEntitiesInterceptor>()
+                .AddDbContext<ApplicationContext>((provider, options) =>
+                {
+                    options.UseNpgsql(configuration.GetConnectionString("DatabaseConnection"))
+                        .AddInterceptors(provider.GetService<AuditableEntitiesInterceptor>()!);
+                })                
+                .AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationContext>()!)
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>))
+                .AddScoped<IOrderRepository, OrderRepository>();
 }

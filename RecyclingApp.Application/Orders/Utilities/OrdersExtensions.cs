@@ -1,6 +1,6 @@
 ﻿using RecyclingApp.Application.Exceptions;
 using RecyclingApp.Application.Utilities;
-using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Entities.Orders;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

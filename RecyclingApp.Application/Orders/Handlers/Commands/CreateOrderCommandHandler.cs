@@ -2,8 +2,8 @@
 using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Application.Products.Exceptions;
 using RecyclingApp.Application.Products.Searchers;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Entities.Orders;
+using RecyclingApp.Domain.Repositories;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
