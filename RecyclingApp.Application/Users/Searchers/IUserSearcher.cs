@@ -1,6 +1,6 @@
 ﻿using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Users.Queries;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 

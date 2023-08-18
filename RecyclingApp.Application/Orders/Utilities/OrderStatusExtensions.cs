@@ -1,5 +1,5 @@
 ﻿using RecyclingApp.Application.Orders.Exceptions;
-using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Entities.Orders;
 using OrderStatusContract = RecyclingApp.Application.Orders.Models.OrderStatus;
 
 namespace RecyclingApp.Application.Orders.Utilities;

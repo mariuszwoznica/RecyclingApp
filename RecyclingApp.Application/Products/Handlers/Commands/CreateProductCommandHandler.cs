@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using RecyclingApp.Application.Products.Commands;
 using RecyclingApp.Application.Products.Utilities;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model.Products;
+using RecyclingApp.Domain.Entities.Products;
+using RecyclingApp.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 

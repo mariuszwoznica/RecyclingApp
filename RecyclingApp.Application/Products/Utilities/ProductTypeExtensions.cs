@@ -1,5 +1,5 @@
 ﻿using RecyclingApp.Application.Products.Exceptions;
-using RecyclingApp.Domain.Model.Products;
+using RecyclingApp.Domain.Entities.Products;
 using ProductTypeContract = RecyclingApp.Application.Products.Models.ProductType;
 
 namespace RecyclingApp.Application.Products.Utilities;

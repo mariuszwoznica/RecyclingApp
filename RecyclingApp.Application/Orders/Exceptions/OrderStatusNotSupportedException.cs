@@ -1,4 +1,4 @@
-﻿using RecyclingApp.Domain.Model.Orders;
+﻿using RecyclingApp.Domain.Entities.Orders;
 using System;
 using OrderStatusContract = RecyclingApp.Application.Orders.Models.OrderStatus;
 

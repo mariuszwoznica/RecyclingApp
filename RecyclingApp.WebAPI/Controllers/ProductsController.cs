@@ -20,8 +20,8 @@ public class ProductsController : ControllerBase
         => _mediator = mediator;
 
     /*[HttpGet] //TODO: Find exception
-    [ProducesResponseType(typeof(PageResponse<ProductResponse>), StatusCodes.Status200OK)]
-    public async Task<PageResponse<ProductResponse>> GetProducts(
+    [ProducesResponseType(typeof(PagedResponse<ProductResponse>), StatusCodes.Status200OK)]
+    public async Task<PagedResponse<ProductResponse>> GetProducts(
         [FromQuery] int pageNumber,
         [FromQuery] int pageSize,
         [FromQuery] string? name,
@@ -40,7 +40,7 @@ public class ProductsController : ControllerBase
                 MaxPrice: maxPrice,
                 Sorting: sorting),
             cancellationToken: cancellationToken);
-
+    
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto data, CancellationToken cancellationToken)

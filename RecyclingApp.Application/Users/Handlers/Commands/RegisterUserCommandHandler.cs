@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using RecyclingApp.Application.Users.Commands;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Entities;
+using RecyclingApp.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 

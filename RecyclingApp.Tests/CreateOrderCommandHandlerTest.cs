@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Moq;
-using RecyclingApp.Application.Mapper;
 using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Application.Orders.Handlers.Commands;
-using RecyclingApp.Domain.Interfaces;
-using RecyclingApp.Domain.Model.Orders;
+using RecyclingApp.Domain.Entities.Orders;
+using RecyclingApp.Domain.Repositories;
 using System;
 using System.Linq;
 using System.Threading;

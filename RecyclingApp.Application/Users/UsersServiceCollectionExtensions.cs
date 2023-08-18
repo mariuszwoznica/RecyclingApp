@@ -2,7 +2,7 @@
 using RecyclingApp.Application.Users.Builders;
 using RecyclingApp.Application.Users.Models;
 using RecyclingApp.Application.Users.Searchers;
-using RecyclingApp.Domain.Model;
+using RecyclingApp.Domain.Entities;
 
 namespace RecyclingApp.Application.Users;
 

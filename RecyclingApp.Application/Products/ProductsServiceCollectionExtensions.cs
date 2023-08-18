@@ -2,7 +2,7 @@
 using RecyclingApp.Application.Products.Builders;
 using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Searchers;
-using RecyclingApp.Domain.Model.Products;
+using RecyclingApp.Domain.Entities.Products;
 
 namespace RecyclingApp.Application.Products;
 
