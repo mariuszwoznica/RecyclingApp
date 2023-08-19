@@ -16,4 +16,8 @@
     <ProjectReference Include="..\RecyclingApp.Domain\RecyclingApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Shared\" />
+  </ItemGroup>
+
 </Project>

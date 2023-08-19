@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Products.Commands;
 using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Queries;
@@ -19,7 +19,7 @@ public class ProductsController : ControllerBase
     public ProductsController(IMediator mediator) 
         => _mediator = mediator;
 
-    /*[HttpGet] //TODO: Find exception
+    [HttpGet]
     [ProducesResponseType(typeof(PagedResponse<ProductResponse>), StatusCodes.Status200OK)]
     public async Task<PagedResponse<ProductResponse>> GetProducts(
         [FromQuery] int pageNumber,
@@ -52,5 +52,5 @@ public class ProductsController : ControllerBase
                 Price: data.Price),
             cancellationToken: cancellationToken);
         return Created(string.Empty, cancellationToken);
-    }*/
+    }
 }

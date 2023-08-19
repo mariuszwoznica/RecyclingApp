@@ -1,4 +1,4 @@
-﻿namespace RecyclingApp.Application.Models;
+﻿namespace RecyclingApp.Application.Pagination;
 
 public class PagingInfo
 {

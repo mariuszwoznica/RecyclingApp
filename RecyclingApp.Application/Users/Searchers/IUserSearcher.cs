@@ -1,4 +1,4 @@
-﻿using RecyclingApp.Application.Models;
+﻿using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Users.Queries;
 using RecyclingApp.Domain.Entities;
 using System.Threading;

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecyclingApp.Application.Abstractions;
-using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Models;
 using RecyclingApp.Application.Orders.Queries;
 using RecyclingApp.Application.Orders.Utilities;
+using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Utilities;
 using RecyclingApp.Domain.Entities.Orders;
 using RecyclingApp.Domain.Entities.Products;

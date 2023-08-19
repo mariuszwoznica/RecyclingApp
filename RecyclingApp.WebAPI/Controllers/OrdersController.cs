@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Commands;
 using RecyclingApp.Application.Orders.Models;
 using RecyclingApp.Application.Orders.Queries;
+using RecyclingApp.Application.Pagination;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

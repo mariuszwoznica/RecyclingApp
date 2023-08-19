@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Models;
 using RecyclingApp.Application.Orders.Queries;
 using RecyclingApp.Application.Orders.Searchers;
+using RecyclingApp.Application.Pagination;
 using System.Threading;
 using System.Threading.Tasks;
 
