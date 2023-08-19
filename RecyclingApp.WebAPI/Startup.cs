@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using RecyclingApp.Application;
 using RecyclingApp.Infrastructure;
 using RecyclingApp.WebAPI.Middleware;
+using System.Text.Json.Serialization;
 
 namespace RecyclingApp.WebAPI;
 
@@ -23,10 +24,17 @@ public class Startup
     {
         services.AddApplication();
         services.AddInfrastructure(Configuration);
-        services.AddControllers();
+        services
+            .AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
         services.AddTransient<ExceptionMiddleware>();
-        services.AddSwaggerGen();
-
+        services.AddSwaggerGen(options =>
+        {
+            options.CustomSchemaIds(type => type.ToString());
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
