@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using RecyclingApp.Application;
+using RecyclingApp.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -43,6 +44,7 @@ internal sealed class ExceptionMiddleware : IMiddleware
         exception switch
         {
             ValidationException => StatusCodes.Status422UnprocessableEntity,
+            EntityNotFoundException => StatusCodes.Status404NotFound,
             Exception => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };
