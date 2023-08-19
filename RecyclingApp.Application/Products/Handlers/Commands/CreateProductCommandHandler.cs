@@ -10,15 +10,15 @@ namespace RecyclingApp.Application.Products.Handlers.Commands;
 
 internal class CreateProductCommandHandler : IRequestHandler<CreateProduct>
 {
-    private readonly IRepository<Product> _productRepository;
+    private readonly IRepository<Product> _repository;
 
-    public CreateProductCommandHandler(IRepository<Product> productRepository)
-        => _productRepository = productRepository;
+    public CreateProductCommandHandler(IRepository<Product> repository)
+        => _repository = repository;
 
     public async Task Handle(CreateProduct request, CancellationToken cancellationToken)
     {
         var product = Product.Create(type: request.Type.ToEntity(), name: request.Name, price: request.Price);
-        _productRepository.Add(entity: product);
-        await _productRepository.SaveChangesAsync();
+        _repository.Add(entity: product);
+        await _repository.SaveChangesAsync();
     }
 }

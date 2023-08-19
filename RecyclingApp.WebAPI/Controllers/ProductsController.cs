@@ -5,6 +5,7 @@ using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Products.Commands;
 using RecyclingApp.Application.Products.Models;
 using RecyclingApp.Application.Products.Queries;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,7 +41,15 @@ public class ProductsController : ControllerBase
                 MaxPrice: maxPrice,
                 Sorting: sorting),
             cancellationToken: cancellationToken);
-    
+
+    [HttpGet("{productId:guid}")]
+    [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ProductResponse> GetProduct([FromRoute] Guid productId, CancellationToken cancellationToken)
+        => await _mediator.Send(
+            request: new GetProduct(ProductId: productId),
+            cancellationToken: cancellationToken);
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto data, CancellationToken cancellationToken)
