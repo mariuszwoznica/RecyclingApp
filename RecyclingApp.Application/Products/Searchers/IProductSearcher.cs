@@ -1,4 +1,4 @@
-﻿using RecyclingApp.Application.Models;
+﻿using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Products.Queries;
 using RecyclingApp.Domain.Entities.Products;
 using System;

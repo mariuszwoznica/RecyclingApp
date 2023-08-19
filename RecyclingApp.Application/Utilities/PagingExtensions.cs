@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Pagination;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

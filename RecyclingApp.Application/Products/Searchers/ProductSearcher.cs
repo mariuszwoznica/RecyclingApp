@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecyclingApp.Application.Abstractions;
-using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Products.Queries;
 using RecyclingApp.Application.Products.Utilities;
 using RecyclingApp.Application.Utilities;

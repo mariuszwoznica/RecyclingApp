@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Users.Commands;
 using RecyclingApp.Application.Users.Models;
 using RecyclingApp.Application.Users.Queries;

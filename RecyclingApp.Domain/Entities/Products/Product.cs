@@ -13,15 +13,14 @@ public class Product : BaseEntity, IAuditableEntity
 
     private Product() { }
 
-    private Product(Guid id, ProductType type, string name, decimal price)
+    private Product(ProductType type, string name, decimal price)
     {
-        Id = id;
+        Id = Guid.NewGuid();
         Type = type;
         Name = name;
         Price = price;
     }
 
     public static Product Create(ProductType type, string name, decimal price)
-        => new(Guid.NewGuid(), type, name, price);
-
+        => new(type, name, price);
 }

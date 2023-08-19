@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using RecyclingApp.Application.Abstractions;
-using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Users.Models;
 using RecyclingApp.Application.Users.Queries;
 using RecyclingApp.Application.Users.Searchers;

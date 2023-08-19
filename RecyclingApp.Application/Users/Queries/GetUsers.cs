@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RecyclingApp.Application.Models;
+using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Users.Models;
 
 namespace RecyclingApp.Application.Users.Queries;

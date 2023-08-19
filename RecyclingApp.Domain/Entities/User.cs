@@ -1,7 +1,5 @@
-﻿using RecyclingApp.Domain.Entities.Orders;
-using RecyclingApp.Domain.Primitives;
+﻿using RecyclingApp.Domain.Primitives;
 using System;
-using System.Collections.Generic;
 
 namespace RecyclingApp.Domain.Entities;
 
@@ -14,13 +12,13 @@ public class User : BaseEntity, IAuditableEntity
 
     private User() { }
 
-    public User(Guid id, string firstName, string lastName)
+    public User(string firstName, string lastName)
     {
-        Id = id;
+        Id = Guid.NewGuid();
         FirstName = firstName;
         LastName = lastName;
     }
 
     public static User Create(string firstName, string lastName)
-        => new(Guid.NewGuid(), firstName, lastName);
+        => new(firstName, lastName);
 }

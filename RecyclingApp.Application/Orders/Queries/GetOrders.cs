@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using RecyclingApp.Application.Models;
 using RecyclingApp.Application.Orders.Models;
+using RecyclingApp.Application.Pagination;
 using System;
 
 namespace RecyclingApp.Application.Orders.Queries;

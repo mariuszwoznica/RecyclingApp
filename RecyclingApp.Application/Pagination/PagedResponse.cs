@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RecyclingApp.Application.Models;
+namespace RecyclingApp.Application.Pagination;
 
 public class PagedResponse<T>
 {
