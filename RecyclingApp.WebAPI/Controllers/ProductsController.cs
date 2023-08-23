@@ -44,7 +44,6 @@ public class ProductsController : ControllerBase
 
     [HttpGet("{productId:guid}")]
     [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ProductResponse> GetProduct([FromRoute] Guid productId, CancellationToken cancellationToken)
         => await _mediator.Send(
             request: new GetProduct(ProductId: productId),
