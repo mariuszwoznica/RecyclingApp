@@ -8,9 +8,11 @@ public class CreateProductValidator : AbstractValidator<CreateProduct>
     public CreateProductValidator()
     {
         RuleFor(x => x.Type)
-            .IsInEnum()
-            .WithMessage("Product type is not valid.")
             .NotEmpty();
+
+        RuleFor(x => x.Type)
+            .IsInEnum()
+            .WithMessage("Product type is not valid.");
 
         RuleFor(x => x.Name)
             .NotEmpty();

@@ -47,7 +47,7 @@ public class OrdersController : ControllerBase
         await _mediator.Send(
             request: new CreateOrder(
                 ProductIds: data.ProductIds,
-                Quantity: data.Quantity),
+                Quantities: data.Quantities),
             cancellationToken: cancellationToken);
         return Created(string.Empty, cancellationToken);
     }

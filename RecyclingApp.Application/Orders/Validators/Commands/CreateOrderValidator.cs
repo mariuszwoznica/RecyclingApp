@@ -10,7 +10,7 @@ public class CreateOrderValidator : AbstractValidator<CreateOrder>
         RuleFor(x => x.ProductIds)
             .NotEmpty();
 
-        RuleFor(x => x.Quantity)
+        RuleFor(x => x.Quantities)
             .NotEmpty();
     }
 }
