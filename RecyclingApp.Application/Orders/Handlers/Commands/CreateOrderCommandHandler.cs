@@ -33,7 +33,7 @@ internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder>
         for (int i = 0; i < request.ProductIds.Count; i++)
             order.AddItem(
                 productId: request.ProductIds.ElementAt(i),
-                quantity: request.Quantity.ElementAt(i));
+                quantity: request.Quantities.ElementAt(i));
 
         _orderRepository.Add(entity: order);
         await _orderRepository.SaveChangesAsync();

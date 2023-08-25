@@ -6,4 +6,4 @@ namespace RecyclingApp.Application.Orders.Commands;
 
 public record CreateOrder(
     IReadOnlyCollection<Guid> ProductIds,
-    IReadOnlyCollection<int> Quantity) : IRequest;
+    IReadOnlyCollection<int> Quantities) : IRequest;

@@ -9,17 +9,23 @@ public class RegisterUserValidator : AbstractValidator<RegisterUser>
     public RegisterUserValidator()
     {
         RuleFor(x => x.FirstName)
-            .NotEmpty()
+            .NotEmpty();
+
+        RuleFor(x => x.FirstName)
             .Length(2, 50)
-            .Must(ValidName).WithMessage("{PropertyName} zawiera niepoprawne znaki");
+            .Must(IsValidName).WithMessage("{PropertyName} contains invalid characters")
+            .When(x => x.FirstName is not null);
 
         RuleFor(x => x.LastName)
-            .NotEmpty()
+            .NotEmpty();
+
+        RuleFor(x => x.LastName)
             .Length(2, 50)
-            .Must(ValidName).WithMessage("{PropertyName} zawiera niepoprawne znaki");
+            .Must(IsValidName).WithMessage("{PropertyName} contains invalid characters")
+            .When(x => x.LastName is not null);
     }
 
-    protected static bool ValidName(string name)
+    protected static bool IsValidName(string name)
     {
         name = name.Replace(" ", "");
         name = name.Replace("-", "");
