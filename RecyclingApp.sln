@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Domain", "RecyclingApp.Domain\RecyclingApp.Domain.csproj", "{08E3F001-498A-4705-9E40-D36072D49F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Domain", "src\RecyclingApp.Domain\RecyclingApp.Domain.csproj", "{08E3F001-498A-4705-9E40-D36072D49F6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Application", "RecyclingApp.Application\RecyclingApp.Application.csproj", "{3D2C27DA-6240-4A79-8E44-0F8D33DCBE95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Application", "src\RecyclingApp.Application\RecyclingApp.Application.csproj", "{3D2C27DA-6240-4A79-8E44-0F8D33DCBE95}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Infrastructure", "RecyclingApp.Infrastructure\RecyclingApp.Infrastructure.csproj", "{1D9AE6CB-BDFA-4869-BA61-97E0748E78A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Infrastructure", "src\RecyclingApp.Infrastructure\RecyclingApp.Infrastructure.csproj", "{1D9AE6CB-BDFA-4869-BA61-97E0748E78A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.WebAPI", "RecyclingApp.WebAPI\RecyclingApp.WebAPI.csproj", "{2C0F74AF-6A1B-431B-BA52-D59792FA36E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.WebAPI", "src\RecyclingApp.WebAPI\RecyclingApp.WebAPI.csproj", "{2C0F74AF-6A1B-431B-BA52-D59792FA36E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Tests", "RecyclingApp.Tests\RecyclingApp.Tests.csproj", "{9E335F78-60DD-44BF-BEBD-8CF917515A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecyclingApp.Tests", "tests\RecyclingApp.Tests\RecyclingApp.Tests.csproj", "{9E335F78-60DD-44BF-BEBD-8CF917515A1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1D87AFB8-2B7F-4019-9039-39415DCC6A4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{270CF990-4A5D-470F-B220-B2A2B933E83B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +46,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08E3F001-498A-4705-9E40-D36072D49F6D} = {270CF990-4A5D-470F-B220-B2A2B933E83B}
+		{3D2C27DA-6240-4A79-8E44-0F8D33DCBE95} = {270CF990-4A5D-470F-B220-B2A2B933E83B}
+		{1D9AE6CB-BDFA-4869-BA61-97E0748E78A2} = {270CF990-4A5D-470F-B220-B2A2B933E83B}
+		{2C0F74AF-6A1B-431B-BA52-D59792FA36E9} = {270CF990-4A5D-470F-B220-B2A2B933E83B}
+		{9E335F78-60DD-44BF-BEBD-8CF917515A1B} = {1D87AFB8-2B7F-4019-9039-39415DCC6A4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B5CBE827-171B-42FC-9586-8530C4133394}
