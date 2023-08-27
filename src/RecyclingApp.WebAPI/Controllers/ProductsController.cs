@@ -61,4 +61,14 @@ public class ProductsController : ControllerBase
             cancellationToken: cancellationToken);
         return Created(string.Empty, cancellationToken);
     }
+
+    [HttpDelete("{productId:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteProduct([FromRoute] Guid productId, CancellationToken cancellationToken)
+    {
+        await _mediator.Send(
+            request: new DeleteProduct(ProductId: productId),
+            cancellationToken: cancellationToken);
+        return NoContent();
+    }
 }
