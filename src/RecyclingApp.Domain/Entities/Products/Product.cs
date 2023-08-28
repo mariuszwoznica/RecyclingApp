@@ -23,4 +23,11 @@ public class Product : BaseEntity, IAuditableEntity
 
     public static Product Create(ProductType type, string name, decimal price)
         => new(type, name, price);
+
+    public void Update(ProductType type, string name, decimal price)
+    {
+        Type = type;
+        Name = name;
+        Price = price;
+    }
 }
