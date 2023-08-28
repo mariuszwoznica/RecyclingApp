@@ -20,15 +20,15 @@ internal class ProductSearcher : IProductSearcher
     public ProductSearcher(IApplicationDbContext context)
         => _query = context.Set<Product>().AsNoTracking();
 
-    public async Task<PagedResponse<Product>> GetList(GetProducts query, CancellationToken cancellationToken)
+    public async Task<PagedResponse<Product>> GetListAsync(GetProducts query, CancellationToken cancellationToken)
         => await _query
             .Where(p => query.Name.IsNullOrWhiteSpace() || p.Name == query.Name)
             .Where(p => !query.Type.HasValue || p.Type.Equals(query.Type))
             .ApplyPriceFilter(minPrice: query.MinPrice, maxPrice: query.MaxPrice)
             .ApplySorting(sortingParams: query.Sorting)
-            .TakePage(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
+            .TakePageAsync(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
 
-    public async Task<IReadOnlyCollection<Product>> GetByIds(IReadOnlyCollection<Guid> productIds, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<Product>> GetByIdsAsync(IReadOnlyCollection<Guid> productIds, CancellationToken cancellationToken)
         => await _query
             .Where(p => productIds.Contains(p.Id))
             .ToListAsync(cancellationToken);

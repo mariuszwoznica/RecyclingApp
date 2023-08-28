@@ -18,10 +18,10 @@ internal class UserSearcher : IUserSearcher
     public UserSearcher(IApplicationDbContext context)
         => _query = context.Set<User>().AsNoTracking();
 
-    public async Task<PagedResponse<User>> GetList(GetUsers query, CancellationToken cancellationToken)
+    public async Task<PagedResponse<User>> GetListAsync(GetUsers query, CancellationToken cancellationToken)
         => await _query
             .Where(u => query.FirstName.IsNullOrWhiteSpace() || u.FirstName.ToLower() == query.FirstName!.ToLower())
             .Where(u => query.LastName.IsNullOrWhiteSpace() || u.LastName.ToLower() == query.LastName!.ToLower())
             .ApplySorting(sortingParams: query.Sorting)
-            .TakePage(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
+            .TakePageAsync(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
 }

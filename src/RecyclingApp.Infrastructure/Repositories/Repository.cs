@@ -1,29 +1,33 @@
-﻿using RecyclingApp.Domain.Primitives;
+﻿using Microsoft.EntityFrameworkCore;
+using RecyclingApp.Domain.Primitives;
 using RecyclingApp.Domain.Repositories;
 using System;
 using System.Threading.Tasks;
 
 namespace RecyclingApp.Infrastructure.Repositories;
 
-public class Repository<T> : IRepository<T> where T : BaseEntity
+public class Repository<TEntity> : IRepository<TEntity> 
+    where TEntity : BaseEntity
 {
-    protected readonly ApplicationContext _context;
+    protected readonly ApplicationDbContext _context;
 
-    public Repository(ApplicationContext context) 
+    public Repository(ApplicationDbContext context) 
         => _context = context;
 
-    public async Task<T> GetByIdAsync(Guid id) 
-        => await _context.FindAsync<T>(id);
+    public async Task<TEntity?> GetAsync(Guid id)
+        => await _context.Set<TEntity>()
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == id);
 
-    public void Add(T entity) 
+    public void Add(TEntity entity) 
         => _context.Add(entity);
 
-    public void Update(T entity) 
+    public void Update(TEntity entity) 
         => _context.Update(entity);
 
-    public void Remove(T entity) 
+    public void Delete(TEntity entity) 
         => _context.Remove(entity);
 
-    public async Task<bool> SaveChangesAsync() 
-        => (await _context.SaveChangesAsync() > 0);
+    public async Task SaveChangesAsync() 
+        => await _context.SaveChangesAsync();
 }

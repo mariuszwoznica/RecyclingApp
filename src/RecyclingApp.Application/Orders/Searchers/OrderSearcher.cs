@@ -7,6 +7,7 @@ using RecyclingApp.Application.Pagination;
 using RecyclingApp.Application.Utilities;
 using RecyclingApp.Domain.Entities.Orders;
 using RecyclingApp.Domain.Entities.Products;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ internal class OrderSearcher : IOrderSearcher
         _productQuery = context.Set<Product>().AsNoTracking();
     }
 
-    public async Task<PagedResponse<OrderResponse>> GetList(GetOrders query, CancellationToken cancellationToken)
+    public async Task<PagedResponse<OrderResponse>> GetListAsync(GetOrders query, CancellationToken cancellationToken)
         => await _query
             .Where(o => !query.Status.HasValue || o.Status.Equals(query.Status))
             .ApplyCreatedAtFilter(minCreatedAt: query.MinCreatedAt, maxCreatedAt: query.MaxCreatedAt) 
@@ -38,5 +39,10 @@ internal class OrderSearcher : IOrderSearcher
                     .Join(_productQuery, i => i.ProductId, p => p.Id,
                         (i, p) => new OrderItemDto { ProductType = p.Type, Quantity = i.Quantity }),
             })
-            .TakePage(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
+            .TakePageAsync(pageNumber: query.Page, pageSize: query.PageSize, cancellationToken: cancellationToken);
+
+    public async Task<Order?> GetWithItemsAsync(Guid id)
+        => await _query
+            .Include(o => o.OrderItems)
+            .SingleOrDefaultAsync(o => o.Id == id);
 }

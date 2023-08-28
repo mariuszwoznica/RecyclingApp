@@ -23,7 +23,7 @@ internal class GetProductQueryHandler : IRequestHandler<GetProduct, ProductRespo
 
     public async Task<ProductResponse> Handle(GetProduct request, CancellationToken cancellationToken)
     {
-        var result = await _repository.GetByIdAsync(id: request.ProductId);
+        var result = await _repository.GetAsync(id: request.ProductId);
 
         if (result is null)
             throw new EntityNotFoundException(entityId: request.ProductId);

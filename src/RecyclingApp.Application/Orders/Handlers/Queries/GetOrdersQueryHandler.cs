@@ -16,5 +16,5 @@ internal class GetOrdersQueryHandler : IRequestHandler<GetOrders, PagedResponse<
         => _searcher = searcher;
 
     public async Task<PagedResponse<OrderResponse>> Handle(GetOrders request, CancellationToken cancellationToken)
-        => await _searcher.GetList(query: request, cancellationToken: cancellationToken);
+        => await _searcher.GetListAsync(query: request, cancellationToken: cancellationToken);
 }

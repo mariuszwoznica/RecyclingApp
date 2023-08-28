@@ -16,12 +16,12 @@ internal class DeleteProductCommandHandler : IRequestHandler<DeleteProduct>
 
     public async Task Handle(DeleteProduct request, CancellationToken cancellationToken)
     {
-        var product = await _repository.GetByIdAsync(id: request.ProductId);
+        var product = await _repository.GetAsync(id: request.ProductId);
 
         if (product is null)
             return;
 
-        _repository.Remove(product);
+        _repository.Delete(product);
         await _repository.SaveChangesAsync();
     }
 }

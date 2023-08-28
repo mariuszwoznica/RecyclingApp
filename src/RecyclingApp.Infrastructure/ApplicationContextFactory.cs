@@ -5,9 +5,9 @@ using System.IO;
 
 namespace RecyclingApp.Infrastructure;
 
-public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
+public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
 {
-    public ApplicationContext CreateDbContext(string[] args)
+    public ApplicationDbContext CreateDbContext(string[] args)
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -15,9 +15,9 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
             .AddJsonFile(@Directory.GetCurrentDirectory() + "/../RecyclingApp.WebAPI/appsettings.Local.json", optional: true)
             .Build();
 
-        var builder = new DbContextOptionsBuilder<ApplicationContext>();
+        var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
         var connectionStrings = configuration.GetConnectionString("DatabaseConnection");
         builder.UseNpgsql(connectionStrings);
-        return new ApplicationContext(builder.Options);
+        return new ApplicationDbContext(builder.Options);
     }
 }

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace RecyclingApp.Domain.Repositories;
 
-public interface IRepository<T> where T : BaseEntity
+public interface IRepository<TEntity> where TEntity : BaseEntity
 {
-    Task<T> GetByIdAsync(Guid id);
-    void Add(T entity);
-    void Update(T entity);
-    void Remove(T entity);
-    Task<bool> SaveChangesAsync();
+    Task<TEntity?> GetAsync(Guid id);
+    void Add(TEntity entity);
+    void Update(TEntity entity);
+    void Delete(TEntity entity);
+    Task SaveChangesAsync();
 }

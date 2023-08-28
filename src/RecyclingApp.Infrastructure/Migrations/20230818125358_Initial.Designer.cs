@@ -11,7 +11,7 @@ using RecyclingApp.Infrastructure;
 
 namespace RecyclingApp.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230818125358_Initial")]
     partial class Initial
     {

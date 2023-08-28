@@ -24,7 +24,7 @@ internal class GetProductsQueryHandler : IRequestHandler<GetProducts, PagedRespo
 
     public async Task<PagedResponse<ProductResponse>> Handle(GetProducts request, CancellationToken cancellationToken)
     {
-        var result = await _searcher.GetList(query: request, cancellationToken: cancellationToken);
+        var result = await _searcher.GetListAsync(query: request, cancellationToken: cancellationToken);
 
         return new PagedResponse<ProductResponse>(
             results: result.Results.Select(p => _responseBuilder.Build(input: p)).ToList(), 

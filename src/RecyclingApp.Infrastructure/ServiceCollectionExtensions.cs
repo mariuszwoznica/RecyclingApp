@@ -14,12 +14,11 @@ public static class ServiceCollectionExtensions
         this IServiceCollection serviceCollection, IConfiguration configuration)
             => serviceCollection
                 .AddSingleton<AuditableEntitiesInterceptor>()
-                .AddDbContext<ApplicationContext>((provider, options) =>
+                .AddDbContext<ApplicationDbContext>((provider, options) =>
                 {
                     options.UseNpgsql(configuration.GetConnectionString("DatabaseConnection"))
                         .AddInterceptors(provider.GetService<AuditableEntitiesInterceptor>()!);
                 })                
-                .AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationContext>()!)
-                .AddScoped(typeof(IRepository<>), typeof(Repository<>))
-                .AddScoped<IOrderRepository, OrderRepository>();
+                .AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>()!)
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>));
 }

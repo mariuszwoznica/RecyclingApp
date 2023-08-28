@@ -24,7 +24,7 @@ internal class GetUsersQueryHandler : IRequestHandler<GetUsers, PagedResponse<Us
 
     public async Task<PagedResponse<UserResponse>> Handle(GetUsers request, CancellationToken cancellationToken)
     {
-        var result = await _searcher.GetList(query: request, cancellationToken: cancellationToken);
+        var result = await _searcher.GetListAsync(query: request, cancellationToken: cancellationToken);
 
         return new PagedResponse<UserResponse>(
             results: result.Results.Select(u => _responseBuilder.Build(input: u)).ToList(),

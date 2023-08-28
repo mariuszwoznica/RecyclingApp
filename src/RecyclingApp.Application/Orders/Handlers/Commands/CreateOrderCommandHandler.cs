@@ -12,20 +12,20 @@ namespace RecyclingApp.Application.Orders.Handlers.Commands;
 
 internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder>
 {
-    private readonly IRepository<Order> _orderRepository;
+    private readonly IRepository<Order> _repository;
     private readonly IProductSearcher _productSearcher;
 
     public CreateOrderCommandHandler(
-        IRepository<Order> orderRepository,
+        IRepository<Order> repository,
         IProductSearcher productSearcher)
     {
-        _orderRepository = orderRepository;
+        _repository = repository;
         _productSearcher = productSearcher;
     }
 
     public async Task Handle(CreateOrder request, CancellationToken cancellationToken)
     {
-        var products = await _productSearcher.GetByIds(productIds: request.ProductIds, cancellationToken: cancellationToken);
+        var products = await _productSearcher.GetByIdsAsync(productIds: request.ProductIds, cancellationToken: cancellationToken);
         if (products.Count != request.ProductIds.Count)
             throw new ProductDoesNotExistsException();
 
@@ -35,7 +35,7 @@ internal class CreateOrderCommandHandler : IRequestHandler<CreateOrder>
                 productId: request.ProductIds.ElementAt(i),
                 quantity: request.Quantities.ElementAt(i));
 
-        _orderRepository.Add(entity: order);
-        await _orderRepository.SaveChangesAsync();
+        _repository.Add(entity: order);
+        await _repository.SaveChangesAsync();
     }
 }
