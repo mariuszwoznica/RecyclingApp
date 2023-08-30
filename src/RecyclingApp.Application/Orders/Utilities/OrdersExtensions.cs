@@ -18,31 +18,10 @@ internal static class OrdersExtensions
     }
 
     internal static IOrderedQueryable<Order> ApplySorting(this IQueryable<Order> query, string[]? sortingParams)
-    {
-        if (!sortingParams.IsNullOrEmpty())
-        {
-            var orderingCount = 0;
-            foreach (var param in sortingParams!)
-            {
-                var propertyName = param.Split('\u002C').Select(p => p.Trim().ToLower()).First();
-                if (param.EndsWith("desc"))
-                    query = orderingCount == 0
-                        ? query.OrderByDescending(GetSortProperty(propertyName))
-                        : query.ThenByDescending(GetSortProperty(propertyName));
-                else
-                    query = orderingCount == 0 
-                        ? query.OrderBy(GetSortProperty(propertyName))
-                        : query.ThenBy(GetSortProperty(propertyName));
-                orderingCount++;
-            }
-            return query.ThenBy(o => o.Id);
-        }
-        else
-            return query.OrderBy(o => o.Id);
-    }
+        => query.Sort(propertyProvider: GetProperty, sortingParams: sortingParams);
 
-    private static Expression<Func<Order, object>> GetSortProperty(string property)
-        => property switch
+    private static Expression<Func<Order, object>> GetProperty(string propertyName)
+        => propertyName switch
         {
             "status" => Order => Order.Status,
             "createdat" => Order => Order.CreatedAt,

@@ -17,31 +17,10 @@ internal static class ProductsExtensions
             : query;
 
     internal static IOrderedQueryable<Product> ApplySorting(this IQueryable<Product> query, string[]? sortingParams)
-    {
-        if (!sortingParams.IsNullOrEmpty())
-        {
-            var orderingCount = 0;
-            foreach (var param in sortingParams!)
-            {
-                var propertyName = param.Split('\u002C').Select(p => p.Trim().ToLower()).First();
-                if (param.EndsWith("desc"))
-                    query = orderingCount == 0
-                        ? query.OrderByDescending(GetSortProperty(propertyName))
-                        : query.ThenByDescending(GetSortProperty(propertyName));
-                else
-                    query = orderingCount == 0
-                        ? query.OrderBy(GetSortProperty(propertyName))
-                        : query.ThenBy(GetSortProperty(propertyName));
-                orderingCount++;
-            }
-            return query.ThenBy(o => o.Id);
-        }
-        else
-            return query.OrderBy(o => o.Id);
-    }
+        => query.Sort(propertyProvider: GetProperty, sortingParams: sortingParams);
 
-    private static Expression<Func<Product, object>> GetSortProperty(string property)
-        => property switch
+    private static Expression<Func<Product, object>> GetProperty(string propertyName)
+        => propertyName switch
         {
             "name" => Product => Product.Name,
             "price" => Product => Product.Price,
