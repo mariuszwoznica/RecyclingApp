@@ -23,11 +23,11 @@ public class Order : BaseEntity, IAuditableEntity
     public static Order Create()
         => new(Guid.NewGuid());
 
-    public void AddItem(Guid productId, int quantity, Guid? orderId = null)
+    public void AddItem(Guid productId, int quantity)
     {
         OrderItems ??= new List<OrderItem>();
         OrderItems.Add(new OrderItem(
-            orderId: orderId ?? Id,
+            orderId: Id,
             productId: productId,
             quantity: quantity));
     }

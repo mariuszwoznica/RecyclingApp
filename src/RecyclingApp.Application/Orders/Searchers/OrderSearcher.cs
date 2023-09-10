@@ -21,8 +21,8 @@ internal class OrderSearcher : IOrderSearcher
 
     public OrderSearcher(IApplicationDbContext context)
     {
-        _query = context.Set<Order>().AsNoTracking();
-        _productQuery = context.Set<Product>().AsNoTracking();
+        _query = context.Orders.AsNoTracking();
+        _productQuery = context.Products.AsNoTracking();
     }
 
     public async Task<PagedResponse<OrderResponse>> GetListAsync(GetOrders query, CancellationToken cancellationToken)

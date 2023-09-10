@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
+using RecyclingApp.Domain.Entities;
+using RecyclingApp.Domain.Entities.Orders;
+using RecyclingApp.Domain.Entities.Products;
 
 namespace RecyclingApp.Application.Abstractions;
 
 public interface IApplicationDbContext
 {
-    DbSet<T> Set<T>() where T : class;
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+    DbSet<Order> Orders { get; set; }
+    DbSet<OrderItem> OrderItems { get; set; }
+    DbSet<Product> Products { get; set; }
+    DbSet<User> Users { get; set; }
 }

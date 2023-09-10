@@ -18,7 +18,7 @@ internal class ProductSearcher : IProductSearcher
     private readonly IQueryable<Product> _query;
 
     public ProductSearcher(IApplicationDbContext context)
-        => _query = context.Set<Product>().AsNoTracking();
+        => _query = context.Products.AsNoTracking();
 
     public async Task<PagedResponse<Product>> GetListAsync(GetProducts query, CancellationToken cancellationToken)
         => await _query

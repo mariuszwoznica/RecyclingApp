@@ -1,6 +1,6 @@
 ﻿namespace RecyclingApp.Application.Abstractions;
 
-public interface IResponseBuilder<TInput, TResponce>
+public interface IResponseBuilder<TInput, TResponse>
 {
-    TResponce Build(TInput input);
+    TResponse Build(TInput input);
 }

@@ -16,7 +16,7 @@ internal class UserSearcher : IUserSearcher
     private readonly IQueryable<User> _query;
 
     public UserSearcher(IApplicationDbContext context)
-        => _query = context.Set<User>().AsNoTracking();
+        => _query = context.Users.AsNoTracking();
 
     public async Task<PagedResponse<User>> GetListAsync(GetUsers query, CancellationToken cancellationToken)
         => await _query

@@ -43,7 +43,6 @@ internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrder>
 
         for (int i = 0; i < request.ProductIds.Count; i++)
             order.AddItem(
-                orderId: request.OrderId, 
                 productId: request.ProductIds.ElementAt(i), 
                 quantity: request.Quantity.ElementAt(i));
 
